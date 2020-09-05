@@ -3,14 +3,13 @@ package guru.springframework.controllers.v1;
 import guru.springframework.api.v1.model.CategoryDTO;
 import guru.springframework.api.v1.model.CategoryListDTO;
 import guru.springframework.services.CategoryService;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.List;
+import java.util.Optional;
 
 /**
  * Created by jesussarco on 01/09/2020
@@ -27,18 +26,11 @@ public class CategoryController {
 
     @GetMapping
     public ResponseEntity<CategoryListDTO> getAllCategories() {
-        return new ResponseEntity<>(
-                new CategoryListDTO(categoryService.getAllCategories()), HttpStatus.OK);
+        return ResponseEntity.ok(new CategoryListDTO(categoryService.getAllCategories()));
     }
 
     @GetMapping("{name}")
     public ResponseEntity<CategoryDTO> getCategoryByName(@PathVariable String name) {
-        CategoryDTO categoryDTO = categoryService.getCategoryByName(name);
-
-        if (categoryDTO != null) {
-            return new ResponseEntity<>(categoryDTO, HttpStatus.OK);
-        }
-
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return ResponseEntity.of(Optional.ofNullable(categoryService.getCategoryByName(name)));
     }
 }
