@@ -14,7 +14,7 @@ import java.util.Optional;
  * Created by jesussarco on 01/09/2020
  */
 @Controller
-@RequestMapping("/api/v1/customers/")
+@RequestMapping("/api/v1/customers")
 public class CustomerController {
 
     private final CustomerService customerService;
@@ -28,7 +28,7 @@ public class CustomerController {
         return ResponseEntity.ok(new CustomerListDTO(customerService.getAllCustomers()));
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<CustomerDTO> getCustomerById(@PathVariable Long id) {
         return ResponseEntity.of(Optional.ofNullable(customerService.getCustomerById(id)));
     }
@@ -44,5 +44,10 @@ public class CustomerController {
     @PutMapping({"/{id}"})
     public ResponseEntity<CustomerDTO> updateCustomer(@PathVariable Long id, @RequestBody CustomerDTO customerDTO){
         return ResponseEntity.ok(customerService.saveCustomerByDTO(id, customerDTO));
+    }
+
+    @PatchMapping({"/{id}"})
+    public ResponseEntity<CustomerDTO> patchCustomer(@PathVariable Long id, @RequestBody CustomerDTO customerDTO){
+        return ResponseEntity.ok(customerService.patchCustomer(id, customerDTO));
     }
 }

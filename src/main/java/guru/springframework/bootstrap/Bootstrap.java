@@ -33,11 +33,11 @@ public class Bootstrap implements CommandLineRunner {
 
         System.out.println("Categories Added");
 
-        customerRepository.save(Customer.builder().id(1L).firstName("First name 1").lastName("Last Name 1").build());
-        customerRepository.save(Customer.builder().id(2L).firstName("First name 2").lastName("Last Name 2").build());
-        customerRepository.save(Customer.builder().id(3L).firstName("First name 3").lastName("Last Name 3").build());
-        customerRepository.save(Customer.builder().id(4L).firstName("First name 4").lastName("Last Name 4").build());
-        customerRepository.save(Customer.builder().id(5L).firstName("First name 5").lastName("Last Name 5").build());
+        customerRepository.save(Customer.builder().id(1L).firstname("Firstname 1").lastname("Lastname 1").build());
+        customerRepository.save(Customer.builder().id(2L).firstname("Firstname 2").lastname("Lastname 2").build());
+        customerRepository.save(Customer.builder().id(3L).firstname("Firstname 3").lastname("Lastname 3").build());
+        customerRepository.save(Customer.builder().id(4L).firstname("Firstname 4").lastname("Lastname 4").build());
+        customerRepository.save(Customer.builder().id(5L).firstname("Firstname 5").lastname("Lastname 5").build());
 
         System.out.println("Customers Added");
     }

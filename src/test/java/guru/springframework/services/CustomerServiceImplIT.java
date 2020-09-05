@@ -50,20 +50,20 @@ public class CustomerServiceImplIT {
         Customer originalCustomer = customerRepository.getOne(id);
         assertNotNull(originalCustomer);
         //save original first name
-        String originalFirstName = originalCustomer.getFirstName();
-        String originalLastName = originalCustomer.getLastName();
+        String originalFirstName = originalCustomer.getFirstname();
+        String originalLastName = originalCustomer.getLastname();
 
         CustomerDTO customerDTO = new CustomerDTO();
-        customerDTO.setFirstName(updatedName);
+        customerDTO.setFirstname(updatedName);
 
         customerService.patchCustomer(id, customerDTO);
 
         Customer updatedCustomer = customerRepository.findById(id).orElseGet(null);
 
         assertNotNull(updatedCustomer);
-        assertEquals(updatedName, updatedCustomer.getFirstName());
-        assertNotEquals(originalFirstName, updatedCustomer.getFirstName());
-        assertEquals(originalLastName, updatedCustomer.getLastName());
+        assertEquals(updatedName, updatedCustomer.getFirstname());
+        assertNotEquals(originalFirstName, updatedCustomer.getFirstname());
+        assertEquals(originalLastName, updatedCustomer.getLastname());
     }
 
     @Test
@@ -75,20 +75,20 @@ public class CustomerServiceImplIT {
         assertNotNull(originalCustomer);
 
         //save original first/last name
-        String originalFirstName = originalCustomer.getFirstName();
-        String originalLastName = originalCustomer.getLastName();
+        String originalFirstName = originalCustomer.getFirstname();
+        String originalLastName = originalCustomer.getLastname();
 
         CustomerDTO customerDTO = new CustomerDTO();
-        customerDTO.setLastName(updatedName);
+        customerDTO.setLastname(updatedName);
 
         customerService.patchCustomer(id, customerDTO);
 
         Customer updatedCustomer = customerRepository.findById(id).orElseGet(null);
 
         assertNotNull(updatedCustomer);
-        assertEquals(updatedName, updatedCustomer.getLastName());
-        assertEquals(originalFirstName, updatedCustomer.getFirstName());
-        assertNotEquals(originalLastName, updatedCustomer.getLastName());
+        assertEquals(updatedName, updatedCustomer.getLastname());
+        assertEquals(originalFirstName, updatedCustomer.getFirstname());
+        assertNotEquals(originalLastName, updatedCustomer.getLastname());
     }
 
     private Long getCustomerIdValue(){

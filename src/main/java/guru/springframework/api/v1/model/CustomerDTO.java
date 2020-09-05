@@ -10,12 +10,8 @@ import lombok.Data;
 public class CustomerDTO {
 
     private Long id;
-
-    @JsonProperty("first_name")
-    private String firstName;
-
-    @JsonProperty("last_name")
-    private String lastName;
+    private String firstname;
+    private String lastname;
 
     @JsonProperty("customer_url")
     private String customerUrl;
