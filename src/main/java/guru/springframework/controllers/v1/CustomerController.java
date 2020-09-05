@@ -40,4 +40,9 @@ public class CustomerController {
         return ResponseEntity.created(URI.create(savedCustomerDTO.getCustomerUrl()))
                 .body(savedCustomerDTO);
     }
+
+    @PutMapping({"/{id}"})
+    public ResponseEntity<CustomerDTO> updateCustomer(@PathVariable Long id, @RequestBody CustomerDTO customerDTO){
+        return ResponseEntity.ok(customerService.saveCustomerByDTO(id, customerDTO));
+    }
 }
