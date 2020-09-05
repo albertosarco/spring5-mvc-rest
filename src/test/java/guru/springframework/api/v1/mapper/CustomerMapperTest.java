@@ -25,7 +25,6 @@ class CustomerMapperTest {
                 .id(1L)
                 .firstName("firstName")
                 .lastName("lastName")
-                .customerUrl("url")
                 .build();
 
         CustomerDTO customerDTO = customerMapper.customerToCustomerDTO(customer);
@@ -33,6 +32,6 @@ class CustomerMapperTest {
         assertEquals(customer.getId(), customerDTO.getId());
         assertEquals(customer.getFirstName(), customerDTO.getFirstName());
         assertEquals(customer.getLastName(), customerDTO.getLastName());
-        assertEquals(customer.getCustomerUrl(), customerDTO.getCustomerUrl());
+        assertEquals("/api/v1/customers/" + customer.getId(), customerDTO.getCustomerUrl());
     }
 }
