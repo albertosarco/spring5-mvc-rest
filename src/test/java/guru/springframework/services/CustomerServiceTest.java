@@ -16,6 +16,8 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.BDDMockito.then;
 import static org.mockito.Mockito.*;
 
 /**
@@ -117,5 +119,27 @@ class CustomerServiceTest {
         customerRepository.deleteById(id);
 
         verify(customerRepository, times(1)).deleteById(anyLong());
+    }
+
+    @Test
+    public void patchCustomer() throws Exception {
+        //given
+        CustomerDTO vendorDTO = new CustomerDTO();
+        vendorDTO.setFirstname("Firstname patched");
+
+        Customer customer = Customer.builder().id(1L).firstname("Firstname 1").build();
+
+        given(customerRepository.findById(anyLong())).willReturn(Optional.of(customer));
+        given(customerRepository.save(any(Customer.class))).willReturn(customer);
+
+        //when
+
+        CustomerDTO savedVendorDTO = customerService.patchCustomer(1L, vendorDTO);
+
+        //then
+        // 'should' defaults to times = 1
+        then(customerRepository).should().save(any(Customer.class));
+        then(customerRepository).should(times(1)).findById(anyLong());
+        org.assertj.core.api.Assertions.assertThat(savedVendorDTO.getCustomerUrl()).contains("1");
     }
 }
