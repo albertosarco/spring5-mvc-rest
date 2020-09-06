@@ -18,7 +18,7 @@ import java.util.Optional;
 @RequestMapping(CategoryController.BASE_URL)
 public class CategoryController {
 
-    public static final String BASE_URL = "api/v1/categories";
+    public static final String BASE_URL = "/api/v1/categories";
     private final CategoryService categoryService;
 
     public CategoryController(CategoryService categoryService) {
@@ -30,7 +30,7 @@ public class CategoryController {
         return ResponseEntity.ok(new CategoryListDTO(categoryService.getAllCategories()));
     }
 
-    @GetMapping("{name}")
+    @GetMapping("/{name}")
     public ResponseEntity<CategoryDTO> getCategoryByName(@PathVariable String name) {
         return ResponseEntity.of(Optional.ofNullable(categoryService.getCategoryByName(name)));
     }
