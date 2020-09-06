@@ -3,18 +3,13 @@ package guru.springframework.controllers.v1;
 import guru.springframework.api.v1.model.CategoryDTO;
 import guru.springframework.api.v1.model.CategoryListDTO;
 import guru.springframework.services.CategoryService;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import java.util.Optional;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Created by jesussarco on 01/09/2020
  */
-@Controller
+@RestController
 @RequestMapping(CategoryController.BASE_URL)
 public class CategoryController {
 
@@ -26,12 +21,14 @@ public class CategoryController {
     }
 
     @GetMapping
-    public ResponseEntity<CategoryListDTO> getAllCategories() {
-        return ResponseEntity.ok(new CategoryListDTO(categoryService.getAllCategories()));
+    @ResponseStatus(HttpStatus.OK)
+    public CategoryListDTO getAllCategories() {
+        return new CategoryListDTO(categoryService.getAllCategories());
     }
 
     @GetMapping("/{name}")
-    public ResponseEntity<CategoryDTO> getCategoryByName(@PathVariable String name) {
-        return ResponseEntity.of(Optional.ofNullable(categoryService.getCategoryByName(name)));
+    @ResponseStatus(HttpStatus.OK)
+    public CategoryDTO getCategoryByName(@PathVariable String name) {
+        return categoryService.getCategoryByName(name);
     }
 }
